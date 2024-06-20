@@ -23,7 +23,12 @@ class SessionsController extends Controller
         if(Auth::attempt($attributes))
         {
             session()->regenerate();
-            return redirect('dashboard')->with(['success'=>'You are logged in.']);
+            if (Auth::user()->isAdmin()) {
+                return redirect('admin/dashboard')->with(['success'=>'You are logged in.']);
+            }
+            else{
+                return redirect('dashboard')->with(['success'=>'You are logged in.']);
+            }
         }
         else{
 
