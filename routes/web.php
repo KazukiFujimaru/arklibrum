@@ -7,6 +7,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\PublisherController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
@@ -97,6 +99,17 @@ Route::group(['middleware' => ['admin']], function () {
 		return view('admin/admin-dashboard');
 	})->name('admin-dashboard');
 
+	//Route atur author
+	Route::get('admin/author', [AuthorController::class, 'viewadm'])->name('admin.author');
+	Route::get('admin/tambah-author', [AuthorController::class, 'addauthor'])->name('admin.tambahauthor');
+	Route::post('admin/simpan-author', [AuthorController::class, 'storeauthor'])->name('admin.simpanauthor');
+	Route::get('admin/edit-author/{id}', [AuthorController::class, 'editauthor'])->name('admin.editauthor');
+	Route::post('admin/update-author/{id}', [AuthorController::class, 'updateauthor'])->name('admin.updateauthor');
+	Route::get('admin/hapus-author/{id}', [AuthorController::class, 'deleteauthor'])->name('admin.hapusauthor');
+	
+	//Route atur publisher
+
+	//Route katalog buku
 	Route::get('admin/katalog', [BookController::class, 'viewadm'])->name('admin.katalog');
 	Route::get('admin/tambah-buku', [BookController::class, 'addbook'])->name('admin.tambahbuku');
 	Route::post('admin/simpan-buku', [BookController::class, 'storebook'])->name('admin.simpanbuku');

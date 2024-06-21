@@ -61,8 +61,6 @@ class BookController extends Controller
     public function updatebook(Request $request, $id)
     {
         try {
-            // Update data into database using DB facade
-            DB::enableQueryLog();
 
             DB::table('books')->where('bookID', $id)->update([
                 'title' => $request->title,
@@ -83,7 +81,7 @@ class BookController extends Controller
             return redirect('/admin/katalog')->with('success', 'Data buku berhasil diubah.');
         } catch (\Exception $e) {
             // Handle any exceptions (e.g., database errors)
-            return redirect()->back()->with('error', 'Gagal mengubah buku, isi kembali sesuai intruksi dengan benar.');
+            return redirect()->back()->with('error', 'Gagal mengubah data buku, isi kembali sesuai intruksi dengan benar.');
         }
     }
 
