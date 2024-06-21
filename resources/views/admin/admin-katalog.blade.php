@@ -14,7 +14,7 @@
             <div class = "row-2">
                 <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                     <h6>Detail Katalog Buku</h6>
-                    <a href="www.google.com" class="btn btn-icon btn-3 btn-primary ms-auto" type="button">
+                    <a href="tambah-buku" class="btn btn-icon btn-3 btn-primary ms-auto" type="button">
                         <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
                         <span class="btn-inner--text">Tambah Buku</span>
                     </a>
@@ -63,5 +63,17 @@
       </div>
     </div>
   </main>
+
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
 
 @endsection

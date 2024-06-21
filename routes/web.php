@@ -96,7 +96,11 @@ Route::group(['middleware' => ['admin']], function () {
 	Route::get('admin/dashboard', function () {
 		return view('admin/admin-dashboard');
 	})->name('admin-dashboard');
+
 	Route::get('admin/katalog', [BookController::class, 'viewadm'])->name('admin.katalog');
+	Route::get('admin/tambah-buku', [BookController::class, 'addbook'])->name('admin.tambahbuku');
+	Route::post('admin/simpan-buku', [BookController::class, 'storebook'])->name('admin.simpanbuku');
+
 	Route::get('admin/akun', function () {
 		return view('admin/admin-akun');
 	})->name('admin-akun');
