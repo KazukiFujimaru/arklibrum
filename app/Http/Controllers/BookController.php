@@ -91,4 +91,21 @@ class BookController extends Controller
     
         return redirect('/admin/katalog')->with('success', 'Data buku berhasil dihapus.');
     }
+
+    public function viewuser()
+    {
+        //Mengambil data dari view database
+        $katalog = DB::table('v_katalogbuku')->get();
+
+        //Mengirim data ke katalog, compact digunakan untuk mengirim data ke views
+        return view('katalogbuku', compact('katalog'));
+    }
+
+    public function bookdetail($id)
+    {
+        $detailbuku = DB::table('v_deskripsibuku')->where('bookID', $id)->get();
+
+        return view('detailbuku', compact('detailbuku'));
+    }
+    
 }

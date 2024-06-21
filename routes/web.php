@@ -73,6 +73,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/login', function () {
 		return view('dashboard');
 	})->name('sign-up');
+
+	//Route katalog
+	Route::get('katalog-buku', [BookController::class, 'viewuser'])->name('katalog-buku');;
+
+	//Route detail buku
+	Route::get('detail-buku/{id}', [BookController::class, 'bookdetail'])->name('detail-buku');
 });
 
 
