@@ -95,6 +95,12 @@ Route::group(['middleware' => ['admin']], function () {
 	Route::get('admin/dashboard', function () {
 		return view('admin/admin-dashboard');
 	})->name('admin-dashboard');
+	Route::get('admin/katalog', function () {
+		return view('admin/admin-katalog');
+	})->name('admin-katalog');
+	Route::get('admin/akun', function () {
+		return view('admin/admin-akun');
+	})->name('admin-akun');
 
 	Route::get('admin/test', function () {
 		return view('welcome');
