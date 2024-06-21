@@ -57,12 +57,13 @@ class AuthorController extends Controller
             ]);
     
             // Redirect back to the catalog page on success
-            return redirect('/admin/author')->with('success', 'Author berhasil ditambahkan.');
+            return redirect('/admin/author')->with('success', 'Author berhasil diperbarui.');
         } catch (\Exception $e) {
             // Handle any exceptions (e.g., database errors)
             return redirect()->back()->with('error', 'Gagal mengubah data author, isi kembali sesuai intruksi dengan benar.');
         }
     }
+    
     public function deleteauthor($id) 
     {
         DB::table('authors')->where('authorID', $id)->delete();

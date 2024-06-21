@@ -108,6 +108,12 @@ Route::group(['middleware' => ['admin']], function () {
 	Route::get('admin/hapus-author/{id}', [AuthorController::class, 'deleteauthor'])->name('admin.hapusauthor');
 	
 	//Route atur publisher
+	Route::get('admin/publisher', [PublisherController::class, 'viewadm'])->name('admin.publisher');
+	Route::get('admin/tambah-publisher', [PublisherController::class, 'addpublisher'])->name('admin.tambahpublisher');
+	Route::post('admin/simpan-publisher', [PublisherController::class, 'storepublisher'])->name('admin.simpanpublisher');
+	Route::get('admin/edit-publisher/{id}', [PublisherController::class, 'editpublisher'])->name('admin.editpublisher');
+	Route::post('admin/update-publisher/{id}', [PublisherController::class, 'updatepublisher'])->name('admin.updatepublisher');
+	Route::get('admin/hapus-publisher/{id}', [PublisherController::class, 'deletepublisher'])->name('admin.hapuspublisher');
 
 	//Route katalog buku
 	Route::get('admin/katalog', [BookController::class, 'viewadm'])->name('admin.katalog');
