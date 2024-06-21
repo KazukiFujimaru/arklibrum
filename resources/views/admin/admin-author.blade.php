@@ -2,10 +2,6 @@
 
 @section('content')
 
-@extends('layouts.user_type.admin')
-
-@section('content')
-
 <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
     <div class="container-fluid py-4">
         <p>
@@ -67,19 +63,5 @@
       </div>
     </div>
   </main>
-
-@if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-
-@if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
-
-@endsection
 
 @endsection

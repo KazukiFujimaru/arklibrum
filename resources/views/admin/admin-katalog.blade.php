@@ -26,6 +26,7 @@
                         <tr>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Judul</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Jumlah Tersedia</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ISBN</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Terakhir Dilihat</th>
                             <th class="text-secondary opacity-7"></th>
                         </tr>
@@ -45,11 +46,14 @@
                                 <p class="text-xs font-weight-bold mb-0">{{ $katalog->copiesAvailable }}</p>
                             </td>
                             <td class="align-middle text-center text-sm">
+                                <span class="font-weight-bold mb-0">{{ $katalog->ISBN }}</span>
+                            </td>
+                            <td class="align-middle text-center text-sm">
                                 <span class="font-weight-bold mb-0">{{ $katalog->dateAdded }}</span>
                             </td>
                             <td class="align-middle">
-                                <a href="javascript;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                                    Edit
+                                <a href="edit-buku/{{$katalog->bookID}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                <span class="badge bg-gradient-primary">Edit</span>
                                 </a>
                             </td>
                         </tr>
@@ -63,17 +67,5 @@
       </div>
     </div>
   </main>
-
-@if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-
-@if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
 
 @endsection

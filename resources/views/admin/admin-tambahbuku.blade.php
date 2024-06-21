@@ -4,10 +4,12 @@
 
 <main class="main-content position-relative max-height-vh-200 h-100 mt-1 border-radius-lg ">
     <div class="container-fluid py-4">
+        <div class="container-fluid pb-2" style="margin-top: -15px;">
             <p>
                     <h3>Tambah Buku</h3>    
                     Tambah katalog buku Ark Librum, ikuti sesuai instruksi pengisian
             </p>
+        </div>
             @if(session('error'))
                 <div class="alert alert-danger">
                     {{ session('error') }}

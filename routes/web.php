@@ -100,6 +100,10 @@ Route::group(['middleware' => ['admin']], function () {
 	Route::get('admin/katalog', [BookController::class, 'viewadm'])->name('admin.katalog');
 	Route::get('admin/tambah-buku', [BookController::class, 'addbook'])->name('admin.tambahbuku');
 	Route::post('admin/simpan-buku', [BookController::class, 'storebook'])->name('admin.simpanbuku');
+	Route::get('admin/edit-buku/{id}', [BookController::class, 'editbook'])->name('admin.editbuku');
+	//Ditambah {id} untuk mendapatkan id
+	Route::post('admin/update-buku/{id}', [BookController::class, 'updatebook'])->name('admin.updatebuku');
+	Route::get('admin/hapus-buku/{id}',[BookController::class, 'deletebook'])->name('admin.hapusbuku');
 
 	Route::get('admin/akun', function () {
 		return view('admin/admin-akun');
