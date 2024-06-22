@@ -12,6 +12,7 @@ use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\BorrowController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 
@@ -34,7 +35,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', [HomeController::class, 'home']);
 	Route::get('dashboard', function () {
-		return view('dashboard');
+		$dashboard = DB::table('v_admdashboard')->first();
+
+		return view('dashboard', compact('dashboard'));
 	})->name('dashboard');
 
 	Route::get('billing', function () {
@@ -84,7 +87,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 	//Route pinjam buku :
 	Route::get('pinjam', [BorrowController::class, 'viewborrow'])->name('pinjam-buku');
-	Route::get('kembalikan', [BorrowController::class, 'viewreturn'])->name('kembalikan-buku');
+	Route::get('pinjam-tambah', [BorrowController::class, 'addborrow'])->name('pinjam-tambah');
+	Route::post('pinjam-simpan', [BorrowController::class, 'storeborrow'])->name('pinjam-simpan');
+	Route::get('pinjam-kembalikan/{id}', [BorrowController::class, 'deleteborrow'])->name('pinjam-kembalikan');
+
 
 });
 
@@ -109,7 +115,9 @@ Route::get('/login', function () {
 // Route untuk admin :
 Route::group(['middleware' => ['admin']], function () {
 	Route::get('admin/dashboard', function () {
-		return view('admin/admin-dashboard');
+		$dashboard = DB::table('v_admdashboard')->first();
+
+		return view('admin/admin-dashboard', compact('dashboard'));
 	})->name('admin-dashboard');
 
 	//Route atur author

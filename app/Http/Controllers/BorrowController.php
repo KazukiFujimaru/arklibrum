@@ -70,8 +70,78 @@ class BorrowController extends Controller
 
         return response()->json(['message' => 'Buku berhasil dikembalikan']);
     }
-    public function viewborrow(){
-        return view('pinjam-buku');
+    public function viewborrow() {
+
+        $pinjam = DB::table('v_borrow')->get();
+
+        return view('pinjam-buku', compact('pinjam'));
     }
+    public function addborrow()
+    {
+        return view('pinjam-tambah');
+    }
+
+    public function storeborrow(Request $request)
+    {
+        try {
+            // Check if the user already has an active borrow for the same book
+            $existingBorrow = DB::table('borrows')
+                ->where('id', $request->id)
+                ->where('bookID', $request->bookID)
+                ->whereNull('returnedAt')
+                ->first();
+    
+            if ($existingBorrow) {
+                // If there's an existing borrow, redirect back with an error message
+                return redirect()->back()->with('error', 'Anda sudah meminjam buku ini dan belum mengembalikannya.');
+            }
+    
+            // Insert data into database using DB facade
+            DB::table('borrows')->insert([
+                'id' => $request->id, // assuming userID is retrieved from authenticated user
+                'bookID' => $request->bookID,
+                'borrowedAt' => now(),
+            ]);
+
+            // Decrement the copiesAvailable field in the books table
+            DB::table('books')
+            ->where('bookID', $request->bookID)
+            ->decrement('copiesAvailable', 1);
+    
+            // Redirect back to the catalog page on success
+            return redirect('pinjam')->with('success', 'Pinjam berhasil ditambahkan.');
+        } catch (\Exception $e) {
+            // Handle any exceptions (e.g., database errors)
+            return redirect()->back()->with('error', 'Gagal menambahkan pinjam, isi kembali sesuai intruksi dengan benar.');
+        }
+    }
+
+    public function deleteborrow($id)
+    {
+        try {
+            // Find the borrow record by ID and delete it
+            $borrow = DB::table('borrows')->where('borrowID', $id)->first();
+    
+            if (!$borrow) {
+                // If the borrow record does not exist, redirect back with an error message
+                return redirect()->back()->with('error', 'Data pinjam tidak ditemukan.');
+            }
+
+            DB::table('books')
+            ->where('bookID', $borrow->bookID)
+            ->increment('copiesAvailable', 1);
+    
+            // Delete the borrow record
+            DB::table('borrows')->where('borrowID', $id)->delete();
+    
+            // Redirect back with a success message
+            return redirect()->back()->with('success', 'Pinjaman sudah dikembalikan.');
+        } catch (\Exception $e) {
+            // Handle any exceptions (e.g., database errors)
+            return redirect()->back()->with('error', 'Gagal menghapus data pinjam.');
+        }
+    }
+    
+    
 }
 
