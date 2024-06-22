@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\View;
@@ -13,6 +14,8 @@ class InfoUserController extends Controller
 
     public function create()
     {
+        $data = DB::table('users')->get();
+
         return view('laravel-examples/user-profile');
     }
 

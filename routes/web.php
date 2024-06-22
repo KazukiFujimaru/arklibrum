@@ -9,9 +9,11 @@ use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\BorrowController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +81,11 @@ Route::group(['middleware' => 'auth'], function () {
 
 	//Route detail buku
 	Route::get('detail-buku/{id}', [BookController::class, 'bookdetail'])->name('detail-buku');
+
+	//Route pinjam buku :
+	Route::get('pinjam', [BorrowController::class, 'viewborrow'])->name('pinjam-buku');
+	Route::get('kembalikan', [BorrowController::class, 'viewreturn'])->name('kembalikan-buku');
+
 });
 
 

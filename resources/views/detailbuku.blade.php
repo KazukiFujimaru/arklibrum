@@ -73,6 +73,18 @@
                                     </table>
                                     <hr>
                                 @endforeach
+                                <div row-2>
+                                    <div>
+                                        <a href="{{ route('pinjam-buku') }}" class="btn btn-icon btn-3 btn-primary ms-auto" type="button">
+                                            <span class="btn-inner--text">Pinjam Buku</span>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="{{ route('kembalikan-buku')}}" class="btn btn-icon btn-3 btn-primary ms-auto" type="button">
+                                            <span class="btn-inner--text">Kembalikan Buku</span>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
